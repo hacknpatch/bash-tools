@@ -6,13 +6,13 @@ if [[ "$1" == *.tar.zst ]]; then
         # Determine the target directory name (strip .tar.zst)
         TARGET_DIR=$(basename "$1" .tar.zst)
         echo "Extracting $1 to $TARGET_DIR..."
-        
+
         # Create the directory if it doesn't exist
         mkdir -p "$TARGET_DIR"
-        
+
         # Decompress and extract into the target directory
         zstd -d -c "$1" | tar -xf - -C "$TARGET_DIR"
-        
+
         if [ $? -eq 0 ]; then
             echo "Success! Extracted to $TARGET_DIR"
             exit 0
@@ -27,8 +27,7 @@ if [[ "$1" == *.tar.zst ]]; then
 fi
 
 # Configuration
-TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
-OUT_FILE="../codebase-${TIMESTAMP}.tar.zst"
+HEX_TIME=$(printf '%x' $(date +%s))
 COMPRESSION_LEVEL="-19"
 THREADS="-T0"
 
@@ -57,17 +56,18 @@ done
 
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     REPO_NAME=$(basename "$(git rev-parse --show-toplevel)")
-    OUT_FILE="../${REPO_NAME}-${TIMESTAMP}.tar.zst"
-    echo "Detected Git repository: $REPO_NAME. Using 'git archive'..."
+    SHORT_HASH=$(git rev-parse --short HEAD)
+    OUT_FILE="../${REPO_NAME}-${HEX_TIME}-${SHORT_HASH}.tar.zst"
+    echo "Detected Git repository: $REPO_NAME ($SHORT_HASH). Using 'git archive'..."
     # git archive HEAD [pathspecs...]
     git archive --format=tar HEAD . "${GIT_EXCLUDES[@]}" | \
     zstd -f $THREADS $COMPRESSION_LEVEL -o "$OUT_FILE"
 
 else
     DIR_NAME=$(basename "$(pwd)")
-    OUT_FILE="../${DIR_NAME}-${TIMESTAMP}.tar.zst"
+    OUT_FILE="../${DIR_NAME}-${HEX_TIME}.tar.zst"
     echo "Not a Git repository. Falling back to rsync + tar..."
-    
+
     # Build rsync exclude flags
     RSYNC_EXCLUDES=()
     for item in "${EXCLUDES[@]}"; do
