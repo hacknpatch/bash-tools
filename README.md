@@ -56,6 +56,39 @@ code-compress filename-69fe4595.tar.zst
 ```
 This automatically detects the format (`zstd` or `lz4`) and extracts into a folder named after the archive.
 
+compress
+```bash
+~/bash-tools$ code-compress -o /tmp/ .
+Checking environment in /bash-tools...
+Detected Git repository: bash-tools (b8a90f6). Using 'git archive'...
+/*stdin*\            : 19.94%   (  30.0 KiB =>   5.98 KiB, /tmp/bash-tools-69e81fad-b8a90f6.tar.zst) 
+---
+Success! Archive created at: /tmp/bash-tools-69e81fad-b8a90f6.tar.zst
+8.0K	/tmp/bash-tools-69e81fad-b8a90f6.tar.zst
+```
+
+list
+```bash
+~/bash-tools$ code-compress ls /tmp/
+Listing archives in /tmp/...
+NAME                                          DATE       TIME     | REV        SIZE       UNCOMP       RATIO 
+-----------------------------------------------------------------------------------------------------------------------
+test_archive-20260422-111104.tar.zst          87:02:04   03:52    | 111104     156B       10KiB        1.52% 
+...
+demo-69e8121a-12beb2d.tar.zst                 26:04:22   12:11    | 12beb2d    2.47MiB    5.31MiB      46.58%
+bash-tools-69e81fad-b8a90f6.tar.zst           26:04:22   13:09    | b8a90f6    5.98KiB    30KiB        19.94%
+```
+
+decompress
+```bash
+$ code-compress bash-tools-69e81fad-b8a90f6.tar.zst 
+Extracting bash-tools-69e81fad-b8a90f6.tar.zst to bash-tools-69e81fad-b8a90f6...
+Success! Extracted to bash-tools-69e81fad-b8a90f6
+/tmp$ ls -l
+total 44096
+drwxrwxr-x 4 gregc gregc    4096 Apr 22 13:11 bash-tools-69e81fad-b8a90f6
+```
+
 ## Testing
 
 - **Local tests**: Run `./code-compress/test.sh` (creates and cleans up a local `./test` directory).
