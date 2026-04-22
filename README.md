@@ -1,6 +1,6 @@
 # Bash Tools
 
-![Cross-Distro Tests](https://github.com/hacknpathc/bash-tools/actions/workflows/test.yml/badge.svg)
+![Cross-Distro Tests](https://github.com/hacknpatch/bash-tools/actions/workflows/test.yml/badge.svg)
 
 A collection of custom bash scripts and a dynamic loader to make them available in your CLI.
 
