@@ -2,7 +2,9 @@
 
 ![Cross-Distro Tests](https://github.com/hacknpatch/bash-tools/actions/workflows/test.yml/badge.svg)
 
-A collection of custom bash scripts and a dynamic loader to make them available in your CLI.
+Bash scripts for general coding task.
+
+- `code-compress` compresses / decompress directories of code ignore any .gitgnore files etc...
 
 ## Setup
 
@@ -56,7 +58,6 @@ This automatically detects the format (`zstd` or `lz4`) and extracts into a fold
 
 ## Testing
 
-A comprehensive test suite is included:
 - **Local tests**: Run `./code-compress/test.sh` (creates and cleans up a local `./test` directory).
 - **Cross-distro tests**: Run tests against different Linux distributions using Docker:
 
