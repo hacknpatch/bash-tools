@@ -1,0 +1,24 @@
+name: Cross-Distro Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro: [ "ubuntu:latest", "alpine:latest", "debian:stable-slim", "fedora:latest" ]
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build and run tests
+      run: |
+        # Use the distro name for the tag (strip :latest or :stable-slim)
+        TAG=$(echo ${{ matrix.distro }} | cut -d: -f1)
+        docker build -t cc-test:$TAG --build-arg DISTRO=${{ matrix.distro }} -f Dockerfile.test .
+        docker run --rm cc-test:$TAG
