@@ -19,7 +19,7 @@ The `load.sh` script automatically scans subdirectories within `~/bash-tools/`, 
 ## Tools
 
 ### `code-compress`
-Compression and extraction utility using / requiring `zstd`.
+Compression and extraction utility using / requiring `zstd` and `rsync`.
 
 #### Compression
 To compress a directory, provide the path as the last argument (defaults to `.`):
