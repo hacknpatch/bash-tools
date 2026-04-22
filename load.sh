@@ -7,6 +7,11 @@ while IFS= read -r -d '' script; do
     # Get the basename without the .sh extension
     cmd_name=$(basename "$script" .sh)
     
+    # Skip test.sh
+    if [[ "$cmd_name" == "test" ]]; then
+        continue
+    fi
+    
     # Create an alias for the script
     alias "$cmd_name"="$script"
 done < <(find "$BASH_TOOLS_ROOT" -mindepth 2 -name "*.sh" -type f -print0)
