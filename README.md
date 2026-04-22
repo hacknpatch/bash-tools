@@ -84,9 +84,9 @@ bash-tools-69e81fad-b8a90f6.tar.zst           26:04:22   13:09    | b8a90f6    5
 $ code-compress bash-tools-69e81fad-b8a90f6.tar.zst 
 Extracting bash-tools-69e81fad-b8a90f6.tar.zst to bash-tools-69e81fad-b8a90f6...
 Success! Extracted to bash-tools-69e81fad-b8a90f6
-/tmp$ ls -l
-total 44096
-drwxrwxr-x 4 gregc gregc    4096 Apr 22 13:11 bash-tools-69e81fad-b8a90f6
+
+/tmp$ ls
+bash-tools-69e81fad-b8a90f6
 ```
 
 ## Testing
