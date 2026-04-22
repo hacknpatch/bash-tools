@@ -22,7 +22,7 @@ The `load.sh` script automatically scans subdirectories within `~/bash-tools/`, 
 Compression and extraction utility using / requiring `zstd` and `rsync`.
 
 #### Compression
-To compress a directory, provide the path as the last argument (defaults to `.`):
+To compress a directory, provide the path as the last argument.
 ```bash
 code-compress [OPTIONS] [PATH]
 ```
@@ -43,7 +43,7 @@ Archives use a **Hexadecimal Unix Timestamp** to ensure they are always sorted c
 - **In a non-Git directory**: `{folder-name}-{hex-timestamp}.tar.*`
 
 #### Listing
-To list all supported archives in a directory (defaults to `.`):
+To list all supported archives in a directory:
 ```bash
 code-compress ls [path]
 ```
